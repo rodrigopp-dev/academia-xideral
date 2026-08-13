@@ -22,3 +22,25 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Carpeta de salida de compilacion estandar
+bin/
+out/
+build/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Configuracion de IDEs (opcional pero muy recomendado)
+# Eclipse
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# IntelliJ IDEA
+.idea/
+*.iml
