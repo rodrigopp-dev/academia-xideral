@@ -39,27 +39,40 @@ public class Principal {
 		Usuario usuario2 = new Usuario("Juan", 25);
 		Usuario usuario3 = new Usuario("Pedro", 28);
 		Usuario usuario4 = new Usuario("Mario", 19);
-		
+
 		List<Usuario> usuarios = new ArrayList<>();
 		usuarios.add(usuario);
 		usuarios.add(usuario2);
 		usuarios.add(usuario3);
 		usuarios.add(usuario4);
-		
+
 		ordenarUsuarios(usuarios);
 
-		Contenido cont = usuario.getListaCatalogo().getFirst().getListaContenido().getFirst();
-
-		if (cont instanceof Pelicula)
-			// Polismorfismo y Casting
-			((Pelicula) cont).reproducir();
-		else
-			// Polismorfismo y Casting
-			((Serie) cont).reproducir();
+		casting(usuario);
 
 		// Polimorfismo
 //		pelicula1.reproducir();
 //		serie1.reproducir();
+
+	}
+
+	public static void casting(Usuario u) {
+		Contenido contenido = null;
+		try {
+			contenido= u.getListaCatalogo().getFirst().getListaContenido().getFirst();
+			
+			if (contenido instanceof Pelicula) {
+				Pelicula p = (Pelicula) contenido;  //DownCasting
+				p.reproducir();  //Polimorfismo
+			} else {
+				Serie s = (Serie) contenido;  //DownCasting
+				s.reproducir(); //Polimorfismo
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println("Este usuario no tiene contenido o catalogos");
+		}
+
+		
 
 	}
 
@@ -70,7 +83,7 @@ public class Principal {
 		for (Usuario u : usuarios) {
 			System.out.println(u);
 		}
-		
+
 		System.out.println("\nComparator por edad");
 		Comparator<Usuario> comparator = Comparator.comparingInt(Usuario::getEdad).reversed();
 
@@ -79,16 +92,16 @@ public class Principal {
 		for (Usuario u : usuarios) {
 			System.out.println(u);
 		}
-		
+
 		System.out.println("\nComparator por nombre y clase anomina");
 		Comparator<Usuario> comparator2 = new Comparator<Usuario>() {
-			
+
 			@Override
 			public int compare(Usuario o1, Usuario o2) {
 				return o1.getNombre().compareToIgnoreCase(o2.getNombre());
 			}
 		};
-		
+
 		Collections.sort(usuarios, comparator2);
 		for (Usuario u : usuarios) {
 			System.out.println(u);
