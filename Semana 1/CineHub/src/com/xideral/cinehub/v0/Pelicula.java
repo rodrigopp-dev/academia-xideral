@@ -33,4 +33,12 @@ public class Pelicula extends Contenido implements Reproducible{
 		this.genero = genero;
 	}
 
+	@Override
+	public String toString() {
+		return "Pelicula [minDuracion=" + minDuracion + ", genero=" + genero + ", titulo=" + titulo + "]";
+	}
+	
+	
+
+
 }

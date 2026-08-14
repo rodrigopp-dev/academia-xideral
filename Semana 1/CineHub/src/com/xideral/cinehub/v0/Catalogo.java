@@ -1,5 +1,6 @@
 package com.xideral.cinehub.v0;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Catalogo {
@@ -7,12 +8,14 @@ public class Catalogo {
 	private String nombre;
 	private List<Contenido> listaContenido;
 	
-	public Catalogo(String nombre, List<Contenido> listaContenido) {
-		super();
+	public Catalogo(String nombre) {
 		this.nombre = nombre;
-		this.listaContenido = listaContenido;
+		this.listaContenido = new ArrayList<>();
 	}
 
+	public void setContenido(Contenido c) {
+		this.listaContenido.add(c);
+	}
 	public String getNombre() {
 		return nombre;
 	}

@@ -3,8 +3,9 @@ package com.xideral.cinehub.v0;
 public class PagoEfectivo implements MetodoPago{
 
 	@Override
-	public void pagar() {
+	public boolean pagar() {
 		System.out.println("Pagando con efectivo");
+		return true;
 		
 	}
 

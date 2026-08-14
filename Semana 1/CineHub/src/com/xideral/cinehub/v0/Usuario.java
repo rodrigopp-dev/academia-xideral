@@ -1,17 +1,18 @@
 package com.xideral.cinehub.v0;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Comparable<Usuario> {
 	private String nombre;
 	private int edad;
-	private List<Catalogo> listaCatalogo;
+	private List<Catalogo> listaCatalogo = new ArrayList<>();
 	private MetodoPago metodoPago;
+	private boolean subscripcionActiva = false;
 	
-	public Usuario(String nombre, int edad, List<Catalogo> listaCatalogo, MetodoPago metodoPago) {
+	public Usuario(String nombre, int edad, MetodoPago metodoPago) {
 		this.nombre = nombre;
 		this.edad = edad;
-		this.listaCatalogo = listaCatalogo;
 		this.metodoPago = metodoPago;
 	}
 	
@@ -19,11 +20,18 @@ public class Usuario {
 	public Usuario(String nombre, int edad) {
 		this.nombre = nombre;
 		this.edad = edad;
-		this.metodoPago = new PagoEfectivo(); 
+		this.metodoPago = new PagoEfectivo();
+	}
+	
+	public void setCatalogo(Catalogo c) {
+		this.listaCatalogo.add(c);
 	}
 
 	public void activarSubscripcion() {
-		metodoPago.pagar();
+		if(metodoPago.pagar())
+			subscripcionActiva = true;
+		else
+			System.out.println("No se pudo realizar el pago");
 	}
 	
 	public String getNombre() {
@@ -57,5 +65,29 @@ public class Usuario {
 	public void setMetodoPago(MetodoPago metodoPago) {
 		this.metodoPago = metodoPago;
 	}
+
+	public boolean isSubscripcionActiva() {
+		return subscripcionActiva;
+	}
+
+	public void setSubscripcionActiva(boolean subscripcionActiva) {
+		this.subscripcionActiva = subscripcionActiva;
+	}
+
+
+	@Override
+	public int compareTo(Usuario o) {
+		return getNombre().compareToIgnoreCase(o.getNombre());
+	}
+
+
+	@Override
+	public String toString() {
+		return "Usuario [nombre=" + nombre + ", edad=" + edad + ", subscripcionActiva=" + subscripcionActiva + "]";
+	}
+	
+	
+	
+	
 	
 }

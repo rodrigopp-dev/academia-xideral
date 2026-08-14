@@ -1,5 +1,6 @@
 package com.xideral.cinehub.v0;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Serie extends Contenido implements Reproducible {
@@ -8,11 +9,10 @@ public class Serie extends Contenido implements Reproducible {
 	private List<Episodio> episodios; //Has-A
 	private int numEpisodios; //Has-A
 	
-	public Serie(String titulo, String descripcion, int anio, double calificacion, String genero,
-			List<Episodio> episodios) {
+	public Serie(String titulo, String descripcion, int anio, double calificacion, String genero) {
 		super(titulo, descripcion, anio, calificacion);
 		this.genero = genero;
-		this.episodios = episodios;
+		this.episodios = new ArrayList<>();
 	}
 	
 	@Override
@@ -21,6 +21,10 @@ public class Serie extends Contenido implements Reproducible {
 
 	}
 
+	public void setEpisodio(Episodio e) {
+		this.episodios.add(e);
+	}
+	
 	public String getGenero() {
 		return genero;
 	}
@@ -44,5 +48,13 @@ public class Serie extends Contenido implements Reproducible {
 	public void setNumEpisodios(int numEpisodios) {
 		this.numEpisodios = numEpisodios;
 	}
+
+	@Override
+	public String toString() {
+		return "Serie [genero=" + genero + ", numEpisodios=" + numEpisodios + ", titulo="
+				+ titulo + "]";
+	}
+	
+	
 
 }
