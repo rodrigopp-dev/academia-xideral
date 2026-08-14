@@ -36,7 +36,11 @@ public class Principal {
 		listaCatalogo.add(favoritos);
 		listaCatalogo.add(verDespues);
 		
-		Usuario usuario = new Usuario("Rodrigo", 50, listaCatalogo);
+		
+		Usuario usuario = new Usuario("Rodrigo", 50);
+		usuario.setListaCatalogo(listaCatalogo);
+		usuario.setMetodoPago(new PagoTarjeta());
+		usuario.activarSubscripcion();
 		
 		Contenido cont = usuario.getListaCatalogo().getFirst().getListaContenido().getFirst();
 		if(cont instanceof Pelicula)
