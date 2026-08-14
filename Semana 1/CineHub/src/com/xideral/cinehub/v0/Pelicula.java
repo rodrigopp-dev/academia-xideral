@@ -1,14 +1,20 @@
 package com.xideral.cinehub.v0;
 
-public class Pelicula extends Contenido {
+public class Pelicula extends Contenido implements Reproducible{
 
-	private int minDuracion;
-	private String genero;
+	private int minDuracion; //Has-A
+	private String genero; //Has-A
 	
 	public Pelicula(String titulo, String descripcion, int anio, double calificacion, int minDuracion, String genero) {
 		super(titulo, descripcion, anio, calificacion);
 		this.minDuracion = minDuracion;
 		this.genero = genero;
+	}
+	
+	@Override
+	public void reproducir() {
+		System.out.println("Reproduciendo pelicula: " + getTitulo());
+
 	}
 
 	public int getMinDuracion() {
@@ -26,4 +32,5 @@ public class Pelicula extends Contenido {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
+
 }

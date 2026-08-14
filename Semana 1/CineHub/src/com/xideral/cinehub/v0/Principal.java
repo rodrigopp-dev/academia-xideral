@@ -38,6 +38,24 @@ public class Principal {
 		
 		Usuario usuario = new Usuario("Rodrigo", 50, listaCatalogo);
 		
+		Contenido cont = usuario.getListaCatalogo().getFirst().getListaContenido().getFirst();
+		if(cont instanceof Pelicula)
+			//Polismorfismo y Casting
+			((Pelicula)cont).reproducir();
+		else
+			//Polismorfismo y Casting
+			((Serie)cont).reproducir();
+		
+		
+		//Polimorfismo
+		pelicula1.reproducir();
+		serie1.reproducir();
+		
+		//Patrón Singleton
+		Configuracion.getInstance();
+		Configuracion.getInstance();
+		Configuracion.getInstance();
+		
 		
 		
 	}

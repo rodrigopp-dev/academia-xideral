@@ -2,17 +2,23 @@ package com.xideral.cinehub.v0;
 
 import java.util.List;
 
-public class Serie extends Contenido {
+public class Serie extends Contenido implements Reproducible {
 	
-	private String genero;
-	private List<Episodio> episodios;
-	private int numEpisodios;
+	private String genero;//Has-A
+	private List<Episodio> episodios; //Has-A
+	private int numEpisodios; //Has-A
 	
 	public Serie(String titulo, String descripcion, int anio, double calificacion, String genero,
 			List<Episodio> episodios) {
 		super(titulo, descripcion, anio, calificacion);
 		this.genero = genero;
 		this.episodios = episodios;
+	}
+	
+	@Override
+	public void reproducir() {
+		System.out.println("Reproduciendo serie: " + getTitulo());
+
 	}
 
 	public String getGenero() {
