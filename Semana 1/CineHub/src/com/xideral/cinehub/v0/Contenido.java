@@ -2,7 +2,7 @@ package com.xideral.cinehub.v0;
 
 public abstract class Contenido {
 	
-	protected String titulo;
+	protected String titulo;  //Moficador de acceso
 	private String descripcion;
 	private int anio;
 	private double calificacion;

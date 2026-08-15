@@ -1,7 +1,6 @@
 package com.xideral.cinehub.v0;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.NoSuchElementException;
 public class Principal {
 
 	public static void main(String[] args) {
-		// Patrón Singleton
+		System.out.println("----- Singleton -----");
 		Configuracion.getInstance();
 		// Se crea una serie y se le setean episodios
 		Serie serie1 = new Serie("Game Of Thrones", "Serie de dragones", 2012, 9.0, "Drama");
@@ -34,6 +33,7 @@ public class Principal {
 		usuario.setCatalogo(verDespues);
 		usuario.setMetodoPago(new PagoTarjeta());
 		usuario.setSubscripcionActiva(false);
+		System.out.println("\n----- Strategy -----");
 		usuario.activarSubscripcion();
 
 		Usuario usuario2 = new Usuario("Juan", 25);
@@ -49,17 +49,32 @@ public class Principal {
 		ordenarUsuarios(usuarios);
 
 		casting(usuario);
+		
+		List<Pelicula> peliculas = new ArrayList<>();
+		peliculas.add(pelicula1);
+		List<Serie> series = new ArrayList<>();
+		series.add(serie1);
+		
+		System.out.println("\n----- Generics -----");
+		generics(peliculas);
+		generics(series);
 
 		// Polimorfismo
 //		pelicula1.reproducir();
 //		serie1.reproducir();
 
 	}
+	
+	public static void generics(List<? extends Contenido> lista) {
+		for (Object contenido : lista) {
+			System.out.println(contenido);
+		}
+	}
 
 	public static void casting(Usuario u) {
-		Contenido contenido = null;
+		System.out.println("\n----- Polimorfismo, Casting, Exceptions -----");
 		try {
-			contenido= u.getListaCatalogo().getFirst().getListaContenido().getFirst();
+			Contenido contenido= u.getListaCatalogo().getFirst().getListaContenido().getFirst();
 			
 			if (contenido instanceof Pelicula) {
 				Pelicula p = (Pelicula) contenido;  //DownCasting
@@ -77,15 +92,15 @@ public class Principal {
 	}
 
 	public static void ordenarUsuarios(List<Usuario> usuarios) {
-		System.out.println("\nComparable por nombre");
+		System.out.println("\n----- Comparable -----");
 		Collections.sort(usuarios);
 
 		for (Usuario u : usuarios) {
 			System.out.println(u);
 		}
 
-		System.out.println("\nComparator por edad");
-		Comparator<Usuario> comparator = Comparator.comparingInt(Usuario::getEdad).reversed();
+		System.out.println("\n----- Comparator y Lambdas -----");
+		Comparator<Usuario> comparator = Comparator.<Usuario>comparingInt(u -> u.getEdad()).reversed();
 
 		Collections.sort(usuarios, comparator);
 
@@ -93,7 +108,7 @@ public class Principal {
 			System.out.println(u);
 		}
 
-		System.out.println("\nComparator por nombre y clase anomina");
+		System.out.println("\n----- Clase anomina -----");
 		Comparator<Usuario> comparator2 = new Comparator<Usuario>() {
 
 			@Override

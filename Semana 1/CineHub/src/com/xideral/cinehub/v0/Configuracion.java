@@ -2,7 +2,7 @@ package com.xideral.cinehub.v0;
 
 public class Configuracion {
 
-	private static Configuracion config;
+	private static Configuracion config;  //Static: le pertenece a la clase
 
 	private Configuracion() {
 		System.out.println("Cargando configuración inicial...");

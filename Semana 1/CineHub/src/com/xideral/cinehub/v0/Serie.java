@@ -23,6 +23,7 @@ public class Serie extends Contenido implements Reproducible {
 
 	public void setEpisodio(Episodio e) {
 		this.episodios.add(e);
+		numEpisodios++;
 	}
 	
 	public String getGenero() {
@@ -37,16 +38,8 @@ public class Serie extends Contenido implements Reproducible {
 		return episodios;
 	}
 
-	public void setEpisodios(List<Episodio> episodios) {
-		this.episodios = episodios;
-	}
-
 	public int getNumEpisodios() {
 		return numEpisodios;
-	}
-
-	public void setNumEpisodios(int numEpisodios) {
-		this.numEpisodios = numEpisodios;
 	}
 
 	@Override
