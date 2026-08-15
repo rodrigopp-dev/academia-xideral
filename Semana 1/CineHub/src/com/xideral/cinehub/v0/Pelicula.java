@@ -1,6 +1,6 @@
 package com.xideral.cinehub.v0;
 
-public class Pelicula extends Contenido implements Reproducible{
+public class Pelicula extends Contenido {
 
 	private int minDuracion; //Has-A
 	private String genero; //Has-A
@@ -37,8 +37,5 @@ public class Pelicula extends Contenido implements Reproducible{
 	public String toString() {
 		return "Pelicula [minDuracion=" + minDuracion + ", genero=" + genero + ", titulo=" + titulo + "]";
 	}
-	
-	
-
 
 }

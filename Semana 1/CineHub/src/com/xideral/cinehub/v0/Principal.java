@@ -79,9 +79,11 @@ public class Principal {
 			if (contenido instanceof Pelicula) {
 				Pelicula p = (Pelicula) contenido;  //DownCasting
 				p.reproducir();  //Polimorfismo
+				p.calificar();
 			} else {
 				Serie s = (Serie) contenido;  //DownCasting
 				s.reproducir(); //Polimorfismo
+				s.calificar();
 			}
 		} catch (NoSuchElementException e) {
 			System.out.println("Este usuario no tiene contenido o catalogos");

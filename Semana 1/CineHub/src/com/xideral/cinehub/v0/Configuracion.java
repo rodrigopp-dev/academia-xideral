@@ -5,7 +5,7 @@ public class Configuracion {
 	private static Configuracion config;  //Static: le pertenece a la clase
 
 	private Configuracion() {
-		System.out.println("Cargando configuración inicial...");
+		System.out.println("Cargando configuración inicial");
 	}
 	
 	public static void getInstance() {

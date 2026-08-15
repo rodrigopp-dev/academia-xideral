@@ -1,6 +1,6 @@
 package com.xideral.cinehub.v0;
 
-public abstract class Contenido {
+public abstract class Contenido implements Reproducible, Calificable{
 	
 	protected String titulo;  //Moficador de acceso
 	private String descripcion;
