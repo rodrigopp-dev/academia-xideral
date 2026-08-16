@@ -10,7 +10,8 @@ public class Principal {
 
 	public static void main(String[] args) {
 		System.out.println("----- Singleton -----");
-		Configuracion.getInstance();
+		Configuracion config = Configuracion.getInstance();
+		config.cargarConfiguracion();
 		// Se crea una serie y se le setean episodios
 		Serie serie1 = new Serie("Game Of Thrones", "Serie de dragones", 2012, 9.0, "Drama");
 		serie1.setEpisodio(new Episodio("Winter is Coming", 40));
@@ -58,10 +59,6 @@ public class Principal {
 		System.out.println("\n----- Generics -----");
 		generics(peliculas);
 		generics(series);
-
-		// Polimorfismo
-//		pelicula1.reproducir();
-//		serie1.reproducir();
 
 	}
 	
