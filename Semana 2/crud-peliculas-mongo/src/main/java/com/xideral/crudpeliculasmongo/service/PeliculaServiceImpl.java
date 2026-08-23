@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -45,15 +47,12 @@ public class PeliculaServiceImpl implements PeliculaService {
 	public Pelicula update(String id, Pelicula pelicula) {
 		Pelicula peliculaExistente = findById(id)
 				.orElseThrow(() -> new PeliculaException("Película no encontrada con id: " + id, HttpStatus.NOT_FOUND));
-		peliculaExistente.setTitulo(pelicula.getTitulo());
-		peliculaExistente.setDescripcion(pelicula.getDescripcion());
-		peliculaExistente.setFechaEstreno(pelicula.getFechaEstreno());
-		peliculaExistente.setDuracion(pelicula.getDuracion());
-		peliculaExistente.setGenero(pelicula.getGenero());
-		peliculaExistente.setDirector(pelicula.getDirector());
-		peliculaExistente.setCalificacion(pelicula.getCalificacion());
-		peliculaExistente.setIdiomaOriginal(pelicula.getIdiomaOriginal());
-		peliculaExistente.setPaisOrigen(pelicula.getPaisOrigen());
+		try {
+			// Copia propiedades ignorando el ID para no alterarlo
+			BeanUtils.copyProperties(pelicula, peliculaExistente, "id");
+		} catch (BeansException e) {
+			throw new PeliculaException(e.getMessage(), HttpStatus.CONFLICT);
+		}
 		Pelicula peliculaActualizada = save(peliculaExistente);
 		return peliculaActualizada;
 
@@ -67,14 +66,13 @@ public class PeliculaServiceImpl implements PeliculaService {
 			throw new PeliculaException("'id' de Pelicula no puede ser modificado. Elimine 'id' del JSON",
 					HttpStatus.BAD_REQUEST);
 		}
-		//int idOriginal = peliculaExistente.getId();
+		// int idOriginal = peliculaExistente.getId();
 		try {
 			peliculaExistente = jsonMapper.updateValue(peliculaExistente, camposActualizar);
 		} catch (JacksonException e) {
-			throw new PeliculaException("Error al actualizar la película parcialmente: " + e.getMessage(),
-					HttpStatus.BAD_REQUEST);
+			throw new PeliculaException(e.getMessage(), HttpStatus.CONFLICT);
 		}
-		//peliculaExistente.setId(idOriginal);
+		// peliculaExistente.setId(idOriginal);
 		Pelicula peliculaActualizada = save(peliculaExistente);
 		return peliculaActualizada;
 
